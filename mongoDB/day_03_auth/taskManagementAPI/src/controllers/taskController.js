@@ -6,7 +6,10 @@ const userService = require("../services/userService")
 // GET all tasks
 exports.getTasks = async (req, res, next) => {
     try {
-        const tasks = await taskService.getAllTasks(req.query)
+        const tasks = await taskService.getAllTasks(
+            req.query,
+            req.user.id
+        )
 
         res.status(200).json({
             success: true,

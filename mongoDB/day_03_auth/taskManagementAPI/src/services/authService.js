@@ -1,9 +1,14 @@
 const User = require("../models/userModel")
-const jwt = require("jsonwebtoken")
+const generateToken = require("../utils/token")
 const bcrypt = require("bcrypt")
 
 exports.registerUser = async (userData) => {
     const { name, email, password, role } = userData
+    if (role === "admin") {
+        const error = new Error("Cannot register as admin")
+        error.statusCode = 403
+        throw error
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -32,16 +37,7 @@ exports.loginUser = async (email, password) => {
         throw error
     }
 
-    const token = jwt.sign(
-        {
-            id: user._id,
-            role: user.role
-        },
-        process.env.JWT_SECRET,
-        {
-            expiresIn: "1h"
-        }
-    )
+    const token = generateToken(user)
 
     return {
         user: {

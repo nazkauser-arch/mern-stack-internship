@@ -1,9 +1,9 @@
-require("dotenv").config({ path: "../../.env" })
+require("dotenv").config({ path: "../.env" })
 
-const config = require ("../config/config")
+const config = require ("./config/config")
 
 const app = require("./app")
-const connectDB = require("../config/database")
+const connectDB = require("./config/database")
 connectDB()
 
 const PORT = process.env.PORT || 3000

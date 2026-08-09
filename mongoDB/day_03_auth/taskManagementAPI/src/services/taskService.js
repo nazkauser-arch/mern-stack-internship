@@ -1,18 +1,19 @@
 const Task = require("../models/taskModel")
 
 // Get all tasks
-exports.getAllTasks = async (filters) => {
+exports.getAllTasks = async (filters, ownerId) => {
     const {
         search,
         status,
         priority,
-        ownerId,
         sortBy,
         page = 1,
         limit = 10
     } = filters
 
-    const query = {}
+    const query = {
+        ownerId
+    }
 
     if (search) {
         query.title = {
@@ -27,10 +28,6 @@ exports.getAllTasks = async (filters) => {
 
     if (priority) {
         query.priority = priority
-    }
-
-    if (ownerId) {
-        query.ownerId = ownerId
     }
 
     let sort = {}
