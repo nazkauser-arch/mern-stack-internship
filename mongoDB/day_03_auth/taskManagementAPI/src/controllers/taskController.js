@@ -44,7 +44,7 @@ exports.getTaskById = async (req, res, next) => {
 // POST create task
 exports.createTask = async (req, res, next) => {
     try {
-        const {ownerId} = req.body
+        const ownerId = req.user.id
 
         const user = await userService.getUserById(ownerId)
 
@@ -54,7 +54,10 @@ exports.createTask = async (req, res, next) => {
             return next(error)
         }
         
-        const task = await taskService.createTask(req.body)
+        const task = await taskService.createTask({
+            ...req.body,
+            ownerId
+        })
 
         res.status(201).json({
             success: true,
