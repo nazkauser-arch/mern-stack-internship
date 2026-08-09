@@ -1,6 +1,7 @@
 const express = require("express")
 const taskRoutes = require("../routes/taskRoutes")
 const userRoutes = require("../routes/userRoutes")
+const authRoutes = require("../routes/authRoutes")
 const logger = require("../middleware/logger")
 const notFound = require("../middleware/notFound")
 const errorHandler = require("../middleware/errorHandler")
@@ -15,6 +16,8 @@ app.use(logger)
 app.use("/api/tasks", taskRoutes)
 
 app.use("/api/users", userRoutes)
+
+app.use("/api/auth", authRoutes)
 
 app.use(notFound)
 
