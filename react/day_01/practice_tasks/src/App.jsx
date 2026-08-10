@@ -2,6 +2,7 @@ import WelcomeMessage from "./components/welcomeMessage"
 import Counter from "./components/Counter"
 import ToggleButton from "./components/toggleButton"
 import UserCard from "./components/userCard"
+import SearchInput from "./components/seacrhInput"
 
 function App() {
   const user = {
@@ -15,8 +16,9 @@ function App() {
     <WelcomeMessage name = "Ali" />
     <Counter />
     <br />
-    <ToggleButton/>
+    <ToggleButton />
     <UserCard user = {user}/>
+    <SearchInput />
     </div>
   )
 }

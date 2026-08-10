@@ -1,7 +1,7 @@
-function UserCard({ user }) {
+function UserCard({user}) {
   return (
     <div>
-      <h2>{user.name}</h2>
+      <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
       <p>Role: {user.role}</p>
     </div>
