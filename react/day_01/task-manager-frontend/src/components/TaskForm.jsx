@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { initialTasks } from '../data/tasks'
 
 function TaskForm({ onAddTask }) {
   const [title, setTitle] = useState('')
@@ -21,7 +22,7 @@ function TaskForm({ onAddTask }) {
     }
 
     const newTask = {
-      id: Date.now(),
+      id: initialTasks.length + 1,
       title: title.trim(),
       description,
       status,
