@@ -1,6 +1,7 @@
 function TaskFilter({ onFilterChange }) {
   return (
     <div>
+        <h1>Filter Tasks</h1>
       <button onClick={() => onFilterChange('all')}>
         All
       </button>

@@ -15,6 +15,7 @@ function TaskSummary({tasks}) {
 
   return (
     <div>
+    <h1>Task Summary</h1>
       <p>Total tasks: {totalTasks}</p>
       <p>Pending tasks: {pendingTasks}</p>
       <p>In-progress tasks: {inProgressTasks}</p>

@@ -40,6 +40,7 @@ function TaskForm({ onAddTask }) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
+        <h1>Add Task</h1>
         <label>Title: </label>
         <input
           type="text"
