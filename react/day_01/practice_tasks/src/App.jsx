@@ -23,13 +23,4 @@ function App() {
   )
 }
 
-// function App() {
-//   const user = {
-//     name: "Ali Khan",
-//     email: "ali@example.com",
-//     role: "user"
-//     }
-//     return <UserCard user = {user}/>
-// }
-
 export default App
