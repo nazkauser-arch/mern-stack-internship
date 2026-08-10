@@ -1,5 +1,5 @@
 export const initialTasks = [
-  {
+    {
     id: 1,
     title: "Learn React fundamentals",
     description: "Understand components, props and state",

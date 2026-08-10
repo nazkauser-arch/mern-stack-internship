@@ -1,7 +1,15 @@
+import { useState } from 'react'
+import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
-import {initialTasks} from './data/tasks'
+import { initialTasks } from './data/tasks'
 
 function App() {
+  const [tasks, setTasks] = useState(initialTasks)
+
+  const handleAddTask = (newTask) => {
+    setTasks((prevTasks) => [...prevTasks, newTask])
+  }
+
   const handleComplete = (id) => {
     console.log("Complete task:", id)
   }
@@ -12,8 +20,10 @@ function App() {
 
   return (
     <div>
+      <TaskForm onAddTask={handleAddTask} />
+
       <TaskList
-        tasks={initialTasks}
+        tasks={tasks}
         onComplete={handleComplete}
         onDelete={handleDelete}
       />
