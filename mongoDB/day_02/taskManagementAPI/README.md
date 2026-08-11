@@ -134,31 +134,31 @@ mongodb-tasks/
 │
 ├── src/
 │   ├── config/
-│   │   └── db.js
+│   │   └── database.js
 │   │
 │   ├── controllers/
-│   │   ├── task.controller.js
-│   │   └── user.controller.js
+│   │   ├── taskController.js
+│   │   └── userController.js
 │   │
 │   ├── middleware/
 │   │   ├── errorHandler.js
 │   │   └── validateTask.js
 │   │
 │   ├── models/
-│   │   ├── task.model.js
-│   │   └── user.model.js
+│   │   ├── taskModel.js
+│   │   └── userModel.js
 │   │
 │   ├── routes/
-│   │   ├── task.routes.js
-│   │   └── user.routes.js
+│   │   ├── taskRoutes.js
+│   │   └── userRoutes.js
 │   │
 │   ├── services/
-│   │   ├── task.service.js
-│   │   └── user.service.js
+│   │   ├── taskService.js
+│   │   └── userService.js
 │   │
-│   ├── app.js
-│   └── server.js
-│
+│   ├── utils/
+│   │   ├── server.js
+│   │   └── app.js
 ├── .env
 ├── package.json
 └── README.md
@@ -188,7 +188,7 @@ npm install
 Start the backend using:
 
 ```bash
-npm start
+node server.js
 ```
 
 Or, if the project uses a development script:
