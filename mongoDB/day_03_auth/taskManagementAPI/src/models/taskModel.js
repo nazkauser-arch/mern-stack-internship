@@ -29,7 +29,6 @@ const taskSchema = new mongoose.Schema(
             enum: ["low", "medium", "high"]
         },
         
-        // TODO: Replace this with authenticated user's ID after authentication is implemented
         ownerId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
