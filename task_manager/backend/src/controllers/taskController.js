@@ -102,7 +102,9 @@ exports.updateTask = async (req, res, next) => {
             }
         }
 
-        const task = await taskService.updateTask(id, updates)
+        const task = await taskService.updateTask(id, 
+            req.user.id,
+            updates)
 
         if (!task) {
             return res.status(404).json({
@@ -137,7 +139,9 @@ exports.deleteTask = async (req, res, next) => {
             })
         }
 
-        const task = await taskService.deleteTask(id)
+        const task = await taskService.deleteTask(id,
+            req.user.id
+        )
 
         if (!task) {
             return res.status(404).json({

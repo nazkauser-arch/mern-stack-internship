@@ -73,18 +73,24 @@ exports.createTask = async(taskData) => {
 }
 
 // Update a task
-exports.updateTask = async (id, updateData) => {
-    return await Task.findByIdAndUpdate(
-        id,
-        updateData,
-        {
-            new: true,
-            runValidators: true
-        }
-    )
+exports.updateTask = async (taskId, ownerId, updates) => {
+  return await Task.findOneAndUpdate(
+    {
+      _id: taskId,
+      ownerId: ownerId
+    },
+    updates,
+    {
+      new: true,
+      runValidators: true
+    }
+  )
 }
 
 // Delete a task
-exports.deleteTask = async (id) => {
-    return await Task.findByIdAndDelete(id)
+exports.deleteTask = async (taskId, ownerId) => {
+  return await Task.findOneAndDelete({
+    _id: taskId,
+    ownerId: ownerId
+  })
 }

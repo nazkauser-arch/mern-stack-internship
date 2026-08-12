@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { initialTasks } from '../data/tasks'
 
 function TaskForm({ onAddTask }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [status, setStatus] = useState('pending')
   const [priority, setPriority] = useState('low')
+  const [dueDate, setDueDate] = useState('')
   const [error, setError] = useState('')
 
   const handleSubmit = (e) => {
@@ -22,11 +22,11 @@ function TaskForm({ onAddTask }) {
     }
 
     const newTask = {
-      id: initialTasks.length + 1,
       title: title.trim(),
       description,
       status,
-      priority
+      priority,
+      dueDate
     }
 
     onAddTask(newTask)
@@ -35,6 +35,7 @@ function TaskForm({ onAddTask }) {
     setDescription('')
     setStatus('pending')
     setPriority('low')
+    setDueDate('')
     setError('')
   }
 
@@ -42,6 +43,7 @@ function TaskForm({ onAddTask }) {
     <form onSubmit={handleSubmit}>
       <div>
         <h1>Add Task</h1>
+
         <label>Title: </label>
         <input
           type="text"
@@ -80,6 +82,15 @@ function TaskForm({ onAddTask }) {
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
+      </div>
+
+      <div>
+        <label>Due Date: </label>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+        />
       </div>
 
       {error && <p>{error}</p>}

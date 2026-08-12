@@ -1,4 +1,6 @@
 const express = require("express")
+const cors = require("cors")
+
 const taskRoutes = require("./routes/taskRoutes")
 const userRoutes = require("./routes/userRoutes")
 const authRoutes = require("./routes/authRoutes")
@@ -12,6 +14,10 @@ const app = express()
 app.use(express.json())
 
 app.use(logger)
+
+app.use(cors({
+  origin: "http://localhost:5173"
+}))
 
 app.use("/api/tasks", taskRoutes)
 

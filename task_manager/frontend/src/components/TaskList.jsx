@@ -9,7 +9,7 @@ function TaskList({tasks, onComplete, onDelete}) {
     <div>
       {tasks.map((task) => (
         <TaskCard
-          key={task.id}
+          key={task._id}
           task={task}
           onComplete={onComplete}
           onDelete={onDelete}

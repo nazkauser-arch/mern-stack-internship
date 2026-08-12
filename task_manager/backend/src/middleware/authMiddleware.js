@@ -18,10 +18,13 @@ const authMiddleware = (req, res, next) => {
 
         next()
     } catch (error) {
-        const authError = new Error("Invalid or expired token")
-        authError.statusCode = 401
-        next(authError)
-    }
+  console.log("JWT ERROR:", error.name)
+  console.log("JWT ERROR MESSAGE:", error.message)
+
+  const authError = new Error("Invalid or expired token")
+  authError.statusCode = 401
+  next(authError)
+}
 }
 
 module.exports = authMiddleware
