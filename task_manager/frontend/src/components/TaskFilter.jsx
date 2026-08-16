@@ -1,22 +1,50 @@
-function TaskFilter({ onFilterChange }) {
-  return (
+function TaskFilter({
+  tasks,
+  status,
+  priority,
+  onStatusChange,
+  onPriorityChange
+}) {
+return (
+  <div>
+    <h1>Filter Tasks</h1>
+
     <div>
-        <h1>Filter Tasks</h1>
-      <button onClick={() => onFilterChange('all')}>
-        All
-      </button>
+      <label>By Status</label>
+      <select   
+        value={status}
+        onChange={(e) => onStatusChange(e.target.value)}
+      >
+          <option value="all">All</option>        
+          <option value="pending">Pending</option>
+          <option value="in_progress">In progress</option>
+          <option value="completed">Completed</option>
+          
+      </select>
+    </div>
 
-      <button onClick={() => onFilterChange('pending')}>
-        Pending
-      </button>
-
-      <button onClick={() => onFilterChange('in_progress')}>
-        In Progress
-      </button>
-
-      <button onClick={() => onFilterChange('completed')}>
-        Completed
-      </button>
+    <div>
+      <br/>
+      <label>By Priority</label>
+        <select
+        value={priority}
+        onChange={(e) => onPriorityChange(e.target.value)}
+        >
+          <option value="all">All</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+    </div>
+    <button 
+      type="button"
+      onClick={() => {
+        onStatusChange("all")
+        onPriorityChange("all")
+      }}
+    >
+      Clear Filters
+    </button>
     </div>
   )
 }

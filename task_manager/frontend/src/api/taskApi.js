@@ -1,11 +1,31 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-export const getTasks = async (token) => {
-  const response = await fetch(`${API_BASE_URL}/tasks`, {
-    headers: {
-      Authorization: `Bearer ${token}`
+export const getTasks = async (token, filters = {}) => {
+  const params = new URLSearchParams()
+
+  if (filters.search) {
+    params.append("search", filters.search)
+  }
+
+  if (filters.status && filters.status !== "all") {
+    params.append("status", filters.status)
+  }
+
+  if (filters.priority && filters.priority !== "all") {
+    params.append("priority", filters.priority)
+  }
+
+  params.append("page", filters.page || 1)
+  params.append("limit", filters.limit || 5)
+
+  const response = await fetch(
+    `${API_BASE_URL}/tasks?${params.toString()}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     }
-  })
+  )
 
   const data = await response.json()
 

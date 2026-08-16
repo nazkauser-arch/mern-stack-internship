@@ -14,25 +14,50 @@ import {
 function App() {
   const [tasks, setTasks] = useState([])
   const [filter, setFilter] = useState('all')
+  const [search, setSearch] = useState("")
+  const [status, setStatus] = useState("all")
+  const [priority, setPriority] = useState("all")
+  const [page, setPage] = useState(1)
+  const [limit] = useState(2)
+  const [pagination, setPagination] = useState({})
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
+  const fetchTasks = async () => {
+    try {
+      setLoading(true)
+        setError(false)
+
+        //to test error loading tasks
+        //throw new Error("Test error")
+
+
         const token = localStorage.getItem('token')
 
         if (!token) {
           return
         }
 
-        const data = await getTasks(token)
+        const data = await getTasks(token,{
+          search,
+          status,
+          priority,
+          page,
+          limit
+        })
         setTasks(data.data)
+        setPagination(data.pagination)
       } catch (error) {
         console.error(error)
+        setError(true)
+        } finally {
+          setLoading(false)
       }
     }
 
+  useEffect(() => {
     fetchTasks()
-  }, [])
+  }, [search, status, priority, page, limit])
 
   const handleAddTask = async (newTask) => {
     try {
@@ -112,15 +137,59 @@ const handleDelete = async (id) => {
 
       <br />
       <TaskFilter
-        currentFilter={filter}
-        onFilterChange={setFilter}
+        status={status}
+        priority={priority}
+        onStatusChange={(value) => {
+          setStatus(value)
+          setPage(1)
+        }}
+        onPriorityChange={(value) => {
+          setPriority(value)
+          setPage(1)
+        }}
       />
 
+      {loading ?(
+        <p>Loading tasks...</p>
+      ) : error ? (
+        <div>
+          <p>Unable to load tasks. Pleae try again.</p>
+
+        <button onClick={fetchTasks}>
+          Retry
+        </button>
+      </div>
+      ) : tasks.length === 0 ? (
+        <p>
+          {status !== "all" || priority !== "all" || search
+          ? "No tasks match the selected filters."
+        : "No tasks have been created yet."}
+        </p>
+      ) : (   
       <TaskList
         tasks={filteredTasks}
+        //hasFilter={status !== "all" || priority !== "all" || search !== ""}
         onComplete={handleComplete}
         onDelete={handleDelete}
       />
+      )}
+      <div>
+  <button
+    onClick={() => setPage((prev) => prev - 1)}
+    disabled={page === 1}
+  >
+    Previous
+  </button>
+
+  <span> Page {page} </span>
+
+  <button
+    onClick={() => setPage((prev) => prev + 1)}
+    disabled={pagination.totalPages && page >= pagination.totalPages}
+  >
+    Next
+  </button>
+</div>
       <TaskSummary tasks={tasks} />
     </div>
   )
