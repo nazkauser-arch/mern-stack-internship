@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom"
+
 function TaskCard({ task, onComplete, onDelete }) {
   return (
-    <div>
+    <div
+      className="task-card"
+      style={{ textAlign: "right" }}
+    >
       <p>ID: {task._id}</p>
       <p>Title: {task.title}</p>
       <p>Description: {task.description}</p>
@@ -15,6 +20,11 @@ function TaskCard({ task, onComplete, onDelete }) {
       <button onClick={() => onDelete(task._id)}>
         Delete
       </button>
+      <Link to={`/tasks/${task._id}/edit`}>
+        <button type="button">
+          Edit
+        </button>
+      </Link>
     </div>
   )
 }

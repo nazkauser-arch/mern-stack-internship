@@ -1,5 +1,21 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
+export const getTask = async (id, token) => {
+  const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw new Error(data.error?.message || "Failed to get task")
+  }
+
+  return data
+}
+
 export const getTasks = async (token, filters = {}) => {
   const params = new URLSearchParams()
 

@@ -3,7 +3,8 @@ import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
 import TaskFilter from './components/TaskFilter'
 import TaskSummary from './components/TaskSummary'
-import Login from './components/login'
+import { BrowserRouter } from 'react-router-dom'
+import AppRoutes from './routes/AppRoutes'
 import {
   getTasks,
   createTask,
@@ -12,6 +13,12 @@ import {
 } from './api/taskApi'
 
 function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  )
+
   const [tasks, setTasks] = useState([])
   const [filter, setFilter] = useState('all')
   const [search, setSearch] = useState("")
