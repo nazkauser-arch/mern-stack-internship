@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { register } from "../api/authApi"
-import { Link } from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import AppHeader from "../components/appHeader"
 
 function RegisterPage() {
@@ -9,6 +9,7 @@ function RegisterPage() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -22,6 +23,7 @@ function RegisterPage() {
     try {
       const data = await register(name, email, password)
       console.log(data)
+      navigate("/login")
     } catch (error) {
       console.error(error)
       setError(error.message || "Registration failed")
@@ -32,7 +34,7 @@ function RegisterPage() {
     <>
     <AppHeader />
 
-      <main>
+      <main className="auth-page">
         <form onSubmit={handleSubmit}>
           <h1>Task Flow</h1>
           <h3>Plan it. Do it.</h3>

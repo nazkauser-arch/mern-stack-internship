@@ -14,10 +14,11 @@ function TasksPage() {
   const [priority, setPriority] = useState("all")
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(1)
-  const [limit] = useState(2)
+  const [limit] = useState(5)
   const [pagination, setPagination] = useState({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [allTasks, setAllTasks] = useState([])
 
   const fetchTasks = async () => {
     try {
@@ -48,8 +49,31 @@ function TasksPage() {
     }
   }
 
+  const fetchAllTasks = async () => {
+  try {
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+      return
+    }
+
+    const data = await getTasks(token, {
+      search,
+      status,
+      priority,
+      page: 1,
+      limit: 1000
+    })
+
+    setAllTasks(data.data)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
   useEffect(() => {
     fetchTasks()
+    fetchAllTasks()
   }, [search, status, priority, page, limit])
 
   const handleComplete = async (id) => {
@@ -155,7 +179,7 @@ function TasksPage() {
         </section>
 
         <footer className="task-summary">
-          <TaskSummary tasks={tasks} />
+          <TaskSummary tasks={allTasks} />
         </footer>
 
       </main>

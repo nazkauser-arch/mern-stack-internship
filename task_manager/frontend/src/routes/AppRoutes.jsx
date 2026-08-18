@@ -8,19 +8,72 @@ import TaskDetailsPage from "../pages/taskDetailsPage"
 import EditTaskPage from "../pages/editTaskPage"
 import NotFoundPage from "../pages/notFoundPage"
 
-function AppRoutes() {
-    return (
-    <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/tasks" element={<TasksPage />} />
-        <Route path="/tasks/new" element={<CreateTaskPage />} />
-        <Route path="/tasks/:id" element={<TaskDetailsPage />} />
-        <Route path="/tasks/:id/edit" element={<EditTaskPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+import ProtectedRoute from "./ProtectedRoute"
 
-    )
+function AppRoutes() {
+  return (
+    <Routes>
+
+      /* Public routes */
+
+      <Route
+        path="/login"
+        element={<LoginPage />}
+      />
+
+      <Route
+        path="/register"
+        element={<RegisterPage />}
+      />
+
+
+      /* Protected routes */
+
+      <Route
+        path="/tasks"
+        element={
+          <ProtectedRoute>
+            <TasksPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/tasks/create"
+        element={
+          <ProtectedRoute>
+            <CreateTaskPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/tasks/:id"
+        element={
+          <ProtectedRoute>
+            <TaskDetailsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/tasks/:id/edit"
+        element={
+          <ProtectedRoute>
+            <EditTaskPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* 404 */}
+
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
+
+    </Routes>
+  )
 }
 
 export default AppRoutes

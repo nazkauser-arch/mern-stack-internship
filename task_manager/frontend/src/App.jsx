@@ -175,7 +175,6 @@ const handleDelete = async (id) => {
       ) : (   
       <TaskList
         tasks={filteredTasks}
-        //hasFilter={status !== "all" || priority !== "all" || search !== ""}
         onComplete={handleComplete}
         onDelete={handleDelete}
       />

@@ -1,42 +1,60 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { login } from "../api/authApi"
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import AppHeader from "../components/appHeader"
-import { useNavigate } from "react-router-dom"
+import useAuth from "../hooks/useAuth"
 
 function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+
   const navigate = useNavigate()
+  const { login, isAuthenticated, loading } = useAuth()
+
+  useEffect(() => {
+    if (!loading && isAuthenticated) {
+      navigate("/tasks", { replace: true })
+    }
+  }, [loading, isAuthenticated, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
 
     try {
-      const data = await login(email, password)
-
-      localStorage.setItem("token", data.data.token)
+      await login(email, password)
 
       navigate("/tasks")
-
-      console.log(data)
     } catch (error) {
       console.error(error)
-      setError(error.message)
+      setError(error.message || "Login failed")
     }
+  }
+
+  if (loading) {
+    return (
+      <>
+        <AppHeader />
+
+        <main className="auth-page">
+          <p>Checking session...</p>
+        </main>
+      </>
+    )
   }
 
   return (
     <>
-    <AppHeader />
+      <AppHeader />
+
       <main className="auth-page">
         <form onSubmit={handleSubmit}>
           <h1>Welcome to Task Flow</h1>
+
           <h3>Plan it. Do it.</h3>
 
           <label>Email:</label>
+
           <input
             type="email"
             placeholder="Enter Email"
@@ -45,6 +63,7 @@ function LoginPage() {
           />
 
           <label>Password:</label>
+
           <input
             type="password"
             placeholder="Enter Password"
@@ -55,15 +74,20 @@ function LoginPage() {
           {error && <p>{error}</p>}
 
           <p>
-            <button type="submit">Login</button>
+            <button type="submit">
+              Login
+            </button>
           </p>
 
           <p>
-            Don't have an account? <Link to="/register">Register</Link>
+            Don't have an account?{" "}
+            <Link to="/register">
+              Register
+            </Link>
           </p>
         </form>
       </main>
-      </>
+    </>
   )
 }
 
