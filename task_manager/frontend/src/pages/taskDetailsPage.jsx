@@ -141,7 +141,7 @@ function TaskDetailsPage() {
               Edit
             </button>
 
-            <button onClick={handleDelete}>
+            <button className="delete-btn" onClick={handleDelete}>
               Delete
             </button>
 

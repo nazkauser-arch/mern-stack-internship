@@ -14,7 +14,7 @@ function TasksPage() {
   const [priority, setPriority] = useState("all")
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(1)
-  const [limit] = useState(5)
+  const [limit] = useState(4)
   const [pagination, setPagination] = useState({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)

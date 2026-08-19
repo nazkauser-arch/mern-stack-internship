@@ -24,7 +24,9 @@ function TaskList({ tasks, onComplete }) {
           </h3>
 
           <div className="task-actions">
+
             <button
+              className="complete-btn"
               onClick={() => onComplete(task._id)}
               disabled={task.status === "completed"}
             >
@@ -32,6 +34,7 @@ function TaskList({ tasks, onComplete }) {
                 ? "Completed"
                 : "Complete"}
             </button>
+
           </div>
 
         </div>

@@ -1,26 +1,41 @@
-function TaskSummary({tasks}) {
-  const totalTasks = tasks.length
+function TaskSummary({ tasks }) {
+  const total = tasks.length
 
-  const pendingTasks = tasks.filter(
-    (task) => task.status === 'pending'
+  const pending = tasks.filter(
+    (task) => task.status === "pending"
   ).length
 
-  const inProgressTasks = tasks.filter(
-    (task) => task.status === 'in_progress'
+  const inProgress = tasks.filter(
+    (task) => task.status === "in_progress"
   ).length
 
-  const completedTasks = tasks.filter(
-    (task) => task.status === 'completed'
+  const completed = tasks.filter(
+    (task) => task.status === "completed"
   ).length
 
   return (
-    <div>
-    <h1>Task Summary</h1>
-      <p>Total tasks: {totalTasks}</p>
-      <p>Pending tasks: {pendingTasks}</p>
-      <p>In-progress tasks: {inProgressTasks}</p>
-      <p>Completed tasks: {completedTasks}</p>
-    </div>
+    <section className="task-summary">
+      <div className="summary-card total-card">
+        <span className="summary-number">{total}</span>
+        <span className="summary-label">Total Tasks</span>
+      </div>
+
+      <div className="summary-card pending-card">
+        <span className="summary-number">{pending}</span>
+        <span className="summary-label">Pending</span>
+      </div>
+
+      <div className="summary-card progress-card">
+        <span className="summary-number">{inProgress}</span>
+        <span className="summary-label">In Progress</span>
+      </div>
+
+      <div className="summary-card completed-card">
+        <span className="summary-number">{completed}</span>
+        <span className="summary-label">Completed</span>
+      </div>
+
+    </section>
   )
 }
 

@@ -30,7 +30,7 @@ function AppHeader() {
   return (
     <header className="app-header">
 
-      <h2>Task Flow</h2>
+      <h2>Task Manager</h2>
 
       <div className="header-actions">
 
@@ -53,7 +53,7 @@ function AppHeader() {
           {isOpen && (
             <div className="dropdown-menu">
 
-              <button onClick={handleLogout}>
+              <button className="logout-btn" onClick={handleLogout}>
                 Logout
               </button>
 

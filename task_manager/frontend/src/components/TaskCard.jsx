@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 function TaskCard({ task, onComplete, onDelete }) {
+  console.log("THIS TASK CARD IS BEING USED")
   return (
     <div
       className="task-card"
@@ -13,18 +14,9 @@ function TaskCard({ task, onComplete, onDelete }) {
       <p>Priority: {task.priority}</p>
       <p>Due Date: {task.dueDate}</p>
 
-      <button onClick={() => onComplete(task._id)}>
+      <button className="complete-btn" onClick={() => onComplete(task._id)}>
         Complete
       </button>
-
-      <button onClick={() => onDelete(task._id)}>
-        Delete
-      </button>
-      <Link to={`/tasks/${task._id}/edit`}>
-        <button type="button">
-          Edit
-        </button>
-      </Link>
     </div>
   )
 }

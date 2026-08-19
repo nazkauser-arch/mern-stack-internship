@@ -49,12 +49,9 @@ function LoginPage() {
 
       <main className="auth-page">
         <form onSubmit={handleSubmit}>
-          <h1>Welcome to Task Flow</h1>
-
-          <h3>Plan it. Do it.</h3>
+          <h1>Welcome to Task Manager</h1>
 
           <label>Email:</label>
-
           <input
             type="email"
             placeholder="Enter Email"
