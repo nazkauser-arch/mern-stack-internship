@@ -4,6 +4,7 @@ const cors = require("cors")
 const taskRoutes = require("./routes/taskRoutes")
 const userRoutes = require("./routes/userRoutes")
 const authRoutes = require("./routes/authRoutes")
+const healthRoutes = require("./routes/healthRoutes")
 const logger = require("./middleware/logger")
 const notFound = require("./middleware/notFound")
 const errorHandler = require("./middleware/errorHandler")
@@ -25,6 +26,8 @@ app.use("/api/tasks", taskRoutes)
 app.use("/api/users", userRoutes)
 
 app.use("/api/auth", authRoutes)
+
+app.use("/health", healthRoutes)
 
 app.use(notFound)
 

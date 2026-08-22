@@ -4,7 +4,7 @@ function TaskList({ tasks, onComplete }) {
   const navigate = useNavigate()
 
   if (tasks.length === 0) {
-    return <p>No tasks found</p>
+    return <p>No tasks has been created yet.</p>
   }
 
   return (
